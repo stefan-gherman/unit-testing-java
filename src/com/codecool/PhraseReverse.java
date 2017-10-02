@@ -3,11 +3,26 @@ package com.codecool;
 import java.util.Arrays;
 
 public class PhraseReverse {
-    public static String reverse(String x){
-        return new StringBuilder(x).reverse().toString();
+    public static String reverse(String str){
+        return new StringBuilder(str).reverse().toString();
     }
 
-    public static String[] reverse(String[] x){
+    public static String reverseWords(String str){
+        String[] words = str.split(" ");
+        for(int i = 0; i < words.length; i++){
+            words[i] = reverse(words[i]);
+        }
+        return join(words, " ");
+    }
+
+    public static String reverseWordOrder(String str){
+        String[] words = str.split(" ");
+        return join(reverseArray(words), " ");
+    }
+
+    // helper functions but test these too
+    
+    public static String[] reverseArray(String[] x){
         String[] rev = Arrays.copyOf(x, x.length);
         for(int i = x.length - 1; i >= 0; i--){
             rev[x.length - 1 - i] = x[i];
@@ -28,11 +43,7 @@ public class PhraseReverse {
         String str = "this is one long sentence without punctuation";
 
         System.out.println("Straight-up reversed: " + reverse(str));
-        String[] words = str.split(" ");
-        for(int i = 0; i < words.length; i++){
-            words[i] = reverse(words[i]);
-        }
-        System.out.println("Reversed words: " + join(words, " "));
-        System.out.println("Reversed word order: " + join(reverse(str.split(" ")), " "));
+        System.out.println("Reversed words: " + reverseWords(str));
+        System.out.println("Reversed word order: " + reverseWordOrder(str));
     }
 }
