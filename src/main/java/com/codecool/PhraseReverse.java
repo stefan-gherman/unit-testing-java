@@ -20,7 +20,12 @@ public class PhraseReverse {
         return join(reverseArray(words), " ");
     }
 
-    public static String reverseN(String str, int n){
+    public static String reverseN(String str, int n) throws IllegalArgumentException,IndexOutOfBoundsException {
+        if( n < 1) {
+            throw new IllegalArgumentException();
+        } else if(n > str.length()) {
+            throw new IndexOutOfBoundsException();
+        }
         StringBuilder sb = new StringBuilder(str.substring(0, n));
         sb.reverse();
         sb.append(str.substring(n, str.length()));
@@ -49,6 +54,7 @@ public class PhraseReverse {
     public static void main(String[] args){
         final String str = "this is one long sentence without punctuation";
 
+        System.out.println("This is the original string: " + str);
         System.out.println("Straight-up reversed: " + reverse(str));
         System.out.println("Reversed words: " + reverseWords(str));
         System.out.println("Reversed word order: " + reverseWordOrder(str));
